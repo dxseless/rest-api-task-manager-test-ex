@@ -1,66 +1,154 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Tesk task:
+# Тестовое задание на позицию php разработчика
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Результат выполнения задания нужно будет оформить здесь же, на гитхабе.
+В качестве ответа __не нужно__ присылать никаких ZIP-архивов и наборов файлов. Все ваши ответы должны быть оформлены на https://github.com/ или на https://bitbucket.org/
+__Присылаете ссылку на ваш репозиторий в форму https://24.future-group.ru/pub/form/4/xnof82/.__
 
-## About Laravel
+Если у вас еще нет аккаунта на github, то это хороший повод его завести.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Если есть вопросы, вы всегда их можете задать в чате https://t.me/futuregroup_php_chat
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ЕСЛИ ВЫСЫЛАЕТЕ ПОДОБНОЕ ЗАДАНИЕ, ТО ПОДГОТОВЬТЕ ОПИСАНИЕ ФУНКЦИОНАЛА ДЛЯ ПРОВЕРЯЮЩЕГО.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Срок 5 рабочих дней с момента получения задания, срок проверки — 5 рабочих дней. Мы отправим ответ на email, если ответа нет, проверьте спам.
 
-## Learning Laravel
+## Задание
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Разработать REST API для управления списком задач . 
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Функционал приложения:
+1. Создание задачи: 
+   Задача должна включать следующие поля:
+   - Название (строка, обязательно, до 255 символов).
+   - Описание (текст, опционально, без ограничений).
+   - Срок выполнения (дата и время).
+   - Дата создания (дата и время).
+   - Статус (выполнена/не выполнена).
+   - Приоритет (низкий, средний, высокий).
+   - Категория (например, "Работа", "Дом", "Личное").
+   
 
-## Laravel Sponsors
+2. Просмотр списка задач:
+   - Возможность поиска по названию .
+   - Сортировка по дате выполнения .
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+3. Редактирование задачи: возможность изменить любое из полей.
 
-### Premium Partners
+4. Удаление задачи.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Пример структуры методов API
 
-## Contributing
+#### 1. Работа с задачами
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Создание задачи  
+  POST /api/tasks  
+  Описание: Создает новую задачу.  
+  Тело запроса:  
+  
+  {
+    "title": "Задача1",
+    "description": "Задача1 описание",
+    "due_date": "2025-01-20T15:00:00",
+    "create_date": "2025-01-20T15:00:00",
+    "priority": "высокий",
+    "category": "Работа",
+    "status": "не выполнена"
+  }
+  
+  
+  Ответ:  
+  
+  {
+    "id": 1,
+    "message": "Task created successfully"
+  }
 
-## Code of Conduct
+- Получение списка задач  
+  GET /api/tasks  
+  Описание: Возвращает список задач с возможностью поиска и сортировки.  
+  Параметры запроса (опционально):
+  - search: поиск по названию.
+  - sort: due_date, created_at.  
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+  Пример запроса:  
+  /api/tasks?search=Задача1&sort=due_date  
 
-## Security Vulnerabilities
+  Ответ:  
+  
+  [
+    {
+      "id": 1,
+      "title": "Задача1",
+      "description": "Задача1 описание",
+      "due_date": "2025-01-20T15:00:00",
+      "create_date": "2025-01-20T15:00:00",
+      "status": "pending",
+      "priority": "высокий",
+      "category": "Работа",
+      "status": "не выполнена"
+    }
+  ]
+  
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- Получение конкретной задачи  
+  GET /api/tasks/{id}  
+  Описание: Возвращает задачу по её ID.  
+  Ответ:  
+  
+  {
+    "id": 1,
+    "title": "Задача1",
+    "description": "Задача1 описание",
+    "due_date": "2025-01-20T15:00:00",
+    "create_date": "2025-01-20T15:00:00",
+    "status": "pending",
+    "priority": "высокий",
+    "category": "Работа",
+    "status": "не выполнена"
+  }
+  
 
-## License
+- Обновление задачи  
+  PUT /api/tasks/{id}  
+  Описание: Обновляет информацию о задаче.  
+  Тело запроса:  
+  
+  {
+    "title": "Задача2",
+    "description": "Задача2 описание обновленное",
+    "due_date": "2025-01-25T18:00:00",
+    "priority": "низкий",
+    "status": "выполнена"
+  }
+  
+  
+  Ответ:  
+  
+  {
+    "message": "Task updated successfully"
+  }
+  
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Удаление задачи  
+  DELETE /api/tasks/{id}  
+  Описание: Удаляет задачу по её ID.  
+  Ответ:  
+  
+  {
+    "message": "Task deleted successfully"
+  }
+  
+
+### Критерии оценки:
+1. Чистота и структура кода.
+2. Следование стандартам и лучшим практикам.
+3. Полнота выполнения функциональных требований.
+4. Документация и инструкции.
+5. Качество тестов.
+
+
+Нужна возможность выводить информацию в списке постранично   
+
+Swagger для отображения методов api (https://swagger.io/)
